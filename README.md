@@ -17,12 +17,12 @@
 
 ## 效果展示
 
-| 应用 | 主题 | 在线体验 |
-|------|------|----------|
-| 铁馆（重量训练） | 🔥 Blaze | [iron-log-5px.pages.dev](https://iron-log-5px.pages.dev/) |
-| 豆仓（咖啡豆） | ☕ Dark Roast | [coffee-vault-2t6.pages.dev](https://coffee-vault-2t6.pages.dev/) |
-| 补剂管家 | 🧊 Frost | [supplement-manager.pages.dev](https://supplement-manager.pages.dev/) |
-| 耗材库（3D打印） | 🌙 Obsidian | [filament-vault-311.pages.dev](https://filament-vault-311.pages.dev/) |
+| 应用 | 主题 | 场景 |
+|------|------|------|
+| 铁馆（重量训练） | 🔥 Blaze | 深色玫红，运动/健身 |
+| 豆仓（咖啡豆） | ☕ Dark Roast | 深色暖调，食品/饮品 |
+| 补剂管家 | 🧊 Frost | 浅色简约，健康/生活 |
+| 耗材库（3D打印） | 🌙 Obsidian | 深蓝灰，科技/极客 |
 
 ## 4 套预设主题
 
