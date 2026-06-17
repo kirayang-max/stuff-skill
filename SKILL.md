@@ -217,8 +217,15 @@ Agent 根据场景特征,提出一个**设计概念**,包含:
 5. Smart Select 三件套逻辑从种子模板复用
 6. 加入导入/导出按钮
 
-**本地模式:** 3 个文件(index.html + styles.css + app.js),所有功能在前端
-**云模式:** 加入 functions/ + schema.sql + manifest.json + sw.js
+**本地模式:** 4 个文件(index.html + styles.css + app.js + icon-192.png),所有功能在前端
+**云模式:** 加入 functions/ + schema.sql + manifest.json + sw.js + icon-192.png + icon-512.png + icon-180.png
+
+**PWA 图标生成(必做):**
+- 根据应用场景和所选主题,生成一个有设计感的 PWA 图标
+- 图标 = 主题渐变背景 + 场景代表性图形(扁平设计)
+- 生成 3 个尺寸:icon-180.png(Apple Touch Icon)、icon-192.png、icon-512.png
+- manifest.json 中加入 icons 数组
+- index.html `<head>` 中加入 `<link rel="apple-touch-icon" href="./icon-180.png" />`
 
 **关于 CSS 变量:** 从当前主题提取变量名(`--bg`, `--surface`, `--text` 等),用自己的 CSS 选择器使用它们。**不要复制种子模板的 CSS 文件。**
 
@@ -266,6 +273,13 @@ Agent 根据场景特征,提出一个**设计概念**,包含:
 ### 本地模式额外
 - **双击即用。** 不依赖服务器、npm、Node.js。
 - **不用 `type="module"`。** file:// 协议下有 CORS 问题。
+
+### PWA 图标(不可妥协)
+- **每个应用必须有设计感的图标。** 不允许留纯文字/默认图标。
+- **图标要求:** 与应用主题色一致的渐变背景 + 场景相关的扁平化图形(如咖啡豆、哑铃、线轴、胶囊等)。
+- **尺寸:** 至少生成 192x192 和 512x512 两个 PNG。iOS 额外加 180x180。
+- **manifest.json 必须包含 icons 数组。** HTML `<head>` 里必须有 `<link rel="apple-touch-icon" href="./icon-180.png" />`。
+- **图标风格:** iOS squircle 造型,主题渐变底色 + 白色或主题色图形,扁平设计,不加文字,不加阴影。
 
 ### 云模式额外
 - **离线 fallback。** Service Worker + localStorage。
