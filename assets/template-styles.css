@@ -35,25 +35,27 @@
  *            食品/手作/收藏品属于合理的 editorial/craft 范畴)
  * ─────────────────────────────────────────────── */
 [data-theme="dark-roast"] {
-  --bg: #1a1412;          /* 不是纯黑，是焦糖深褐 */
-  --surface: #231e1a;
-  --surface2: #2c2520;
-  --surface3: #362e28;
-  --border: #3d3430;
-  --border-light: #4a3f39;
-  --text: #f0e8e0;        /* 不是纯白，是暖米色 */
-  --text-muted: #a89888;
-  --text-dim: #7a6b5e;
-  --accent: #d4a574;      /* 蜂蜜金，饱和度 ~55% */
-  --accent-glow: #e8b888;
+  --bg: #15110d;          /* 焦糖深褐，比旧版更深更暖 */
+  --surface: #1e1812;
+  --surface2: #261d16;
+  --surface3: #2f241b;
+  --border: rgba(216,180,120,0.13);   /* 暖金透明描边，融进底色 */
+  --border-light: rgba(216,180,120,0.24);
+  --text: #f2e8db;        /* 暖米白 */
+  --text-muted: #b6a48e;
+  --text-dim: #857260;
+  --accent: #e6b85f;      /* 蜂蜜金（升级版，更亮更纯，~70%） */
+  --accent-glow: #f0c876;
+  --accent-2: #c0813f;    /* 焦糖色，accent 的暖辅色（边条/次级强调） */
   --green: #6db87a;
   --blue: #7aa3c8;
   --purple: #9b82c4;
-  --red: #c47a6d;
+  --red: #cd6b5a;
   --orange: #d4956a;
   --yellow: #d4b86a;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Noto Sans SC', -apple-system, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Noto Serif SC', Georgia, 'Songti SC', serif;
+  --font-body: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC', system-ui, sans-serif;
+  --font-mono: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 /* ───────────────────────────────────────────────
@@ -67,25 +69,27 @@
  *           比 Inter 多一点性格（tasteskill: 避免 Inter 作为默认）
  * ─────────────────────────────────────────────── */
 [data-theme="frost"] {
-  --bg: #f5f6f8;          /* 不是纯白，是冷灰调 off-white */
+  --bg: #eef1f6;          /* 冷灰调 off-white（升级版，更冷更柔） */
   --surface: #ffffff;
-  --surface2: #f0f1f4;
-  --surface3: #e6e8ec;
-  --border: #d0d3da;
-  --border-light: #e0e3e8;
-  --text: #1c1f26;        /* 不是纯黑，是墨灰 */
-  --text-muted: #5c6370;
-  --text-dim: #9098a5;
-  --accent: #2d6be6;      /* 沉稳蓝，饱和度 ~78% */
-  --accent-glow: #4a85f0;
-  --green: #1a9d4a;
+  --surface2: #f4f7fb;
+  --surface3: #eaeff6;
+  --border: #e4e9f1;       /* 更细的冷灰描边 */
+  --border-light: #d3dbe7;
+  --text: #1b2330;        /* 墨蓝灰，不是纯黑 */
+  --text-muted: #5b6777;
+  --text-dim: #94a1b3;
+  --accent: #2d6be6;      /* 沉稳蓝，~78% */
+  --accent-glow: #4a85f0;  /* 亮态 hover */
+  --accent-2: #1f57c4;    /* 深蓝，accent 按下/强调态 */
+  --green: #1f9d6b;        /* 温和的健康绿 */
   --blue: #2d6be6;
   --purple: #7c5cc4;
   --red: #d93a3a;
-  --orange: #d47a2d;
+  --orange: #dd8526;       /* 警示橙（补货提醒） */
   --yellow: #c49a1a;
   --font-display: 'Inter Tight', 'Inter', -apple-system, sans-serif;
   --font-body: 'Noto Sans SC', -apple-system, sans-serif;
+  --font-mono: 'Spline Sans Mono', ui-monospace, monospace;
 }
 
 /* ───────────────────────────────────────────────
@@ -100,25 +104,28 @@
  *           正文 Noto Sans SC，形成"终端标题+人类正文"的对比
  * ─────────────────────────────────────────────── */
 [data-theme="obsidian"] {
-  --bg: #0f1117;          /* 不是纯黑，是深蓝灰 */
-  --surface: #1a1d27;
-  --surface2: #242833;
-  --surface3: #2e323f;
-  --border: #363b4a;
-  --border-light: #434959;
-  --text: #e4e6ed;        /* 不是纯白，是冷灰白 */
-  --text-muted: #8b90a0;
-  --text-dim: #5c6173;
-  --accent: #818cf8;      /* 薰衣草蓝紫，饱和度 ~70% */
+  --bg: #0f1117;          /* 深蓝灰，不是纯黑；可叠 28px 网格背景增强终端感 */
+  --surface: #171a22;     /* 比旧值更深沉，VS Code 面板感 */
+  --surface2: #1e222e;
+  --surface3: #262b3a;
+  --border: rgba(160,172,210,.12);   /* 半透明冷蓝描边，比实色更通透 */
+  --border-light: rgba(160,172,210,.2);
+  --text: #e4e6ed;        /* 冷灰白，不是纯白 */
+  --text-muted: #99a1b6;
+  --text-dim: #6a7289;
+  --accent: #818cf8;      /* 薰衣草蓝紫，饱和度 ~70%，避开 AI 默认紫 */
   --accent-glow: #a5b4fc;
-  --green: #4ade80;
-  --blue: #60a5fa;
+  --accent-2: #6670e8;    /* 按下态深紫蓝 */
+  --green: #1f9d6b;
+  --blue: #54a0d8;        /* 库存蓝，比亮蓝更沉稳 */
   --purple: #c084fc;
-  --red: #f87171;
-  --orange: #fb923c;
-  --yellow: #fbbf24;
-  --font-display: 'JetBrains Mono', 'SF Mono', monospace;
+  --red: #e07a64;
+  --orange: #e0a23a;      /* 琥珀警示（需烘干/补货） */
+  --yellow: #e0a23a;
+  --gray: #5a6378;
+  --font-display: 'ZCOOL XiaoWei', 'Noto Sans SC', serif;  /* 站酷小薇：中文衬线手作感大标题 */
   --font-body: 'Noto Sans SC', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;  /* 等宽：数据/编号/标签的终端感 */
 }
 
 /* ───────────────────────────────────────────────
@@ -134,25 +141,29 @@
  *           像健身房墙上的标语
  * ─────────────────────────────────────────────── */
 [data-theme="blaze"] {
-  --bg: #1a0a14;          /* 暗玫瑰，不是中性黑 */
-  --surface: #261520;
-  --surface2: #321e2c;
-  --surface3: #3e2838;
-  --border: #4a3344;
-  --border-light: #5c4055;
-  --text: #f5e8f0;        /* 暖粉白，和底色同色温 */
-  --text-muted: #b89aad;
-  --text-dim: #8a6e80;
-  --accent: #f43f7a;      /* 玫红，饱和度 ~75% */
+  --bg: #180810;          /* 暗玫瑰，底色带红调不是中性灰；夜间健身房 LED 氛围 */
+  --surface: #241320;
+  --surface2: #2f1a29;
+  --surface3: #3a2233;
+  --border: rgba(244,63,122,.15);    /* 半透明玫红描边，和 accent 同调 */
+  --border-light: rgba(244,63,122,.3);
+  --text: #f5e8ef;        /* 暖粉白，和底色同色温 */
+  --text-muted: #c4a0b2;
+  --text-dim: #8c6a7b;
+  --accent: #f43f7a;      /* 玫红，饱和度 ~75%，有能量不刺眼 */
   --accent-glow: #ff6b9d;
+  --accent-2: #d92f66;    /* 按下态深玫红 */
   --green: #4ade80;
   --blue: #60a5fa;
   --purple: #c084fc;
   --red: #f87171;
   --orange: #fb923c;
-  --yellow: #fbbf24;
-  --font-display: 'Bebas Neue', Impact, sans-serif;
+  --yellow: #ffc24d;      /* 金色：PR 徒章/高光时刻 */
+  --gold: #ffc24d;
+  --gray: #8c6a7b;
+  --font-display: 'ZCOOL QingKe HuangYou', 'Noto Sans SC', sans-serif;  /* 站酷庆科黄油体：粗黑冲击力大标题 */
   --font-body: 'Noto Sans SC', -apple-system, sans-serif;
+  --font-mono: 'Bebas Neue', Impact, sans-serif;  /* Bebas Neue：数字/吸量标签，健身房标语感 */
 }
 
 /* ===== Global Reset ===== */

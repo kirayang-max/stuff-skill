@@ -190,6 +190,66 @@ document.documentElement.setAttribute('data-theme',
 
 ---
 
+## Overview 概览卡（可选）
+
+顶部一张统计卡：大数字（总量）+ 分状态统计 + 一条彩色比例条。让用户一眼看清全局。**适用场景**：任何有“状态分布”的管理类 App（在用/备用/已停、架上/冰箱/喝完等）。已在补剂管家实战验证。
+
+```html
+<div id="overview" class="overview"></div>  <!-- JS 填充 -->
+```
+
+```css
+.overview {
+  margin: var(--space-lg) var(--space-lg) var(--space-xs);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  display: flex; align-items: center; gap: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  animation: fadeUp .35s ease both;
+}
+.overview:empty { display: none; }
+.ov-num {
+  font-family: var(--font-display);
+  font-size: 38px; font-weight: 600; line-height: .9;
+  letter-spacing: -.02em; color: var(--color-text);
+}
+.ov-cap { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 6px; letter-spacing: .08em; }
+.ov-div { width: 1px; height: 48px; background: var(--color-border); flex-shrink: 0; }
+.ov-right { flex: 1; min-width: 0; }
+.ov-stats { display: flex; gap: var(--space-lg); }
+.ov-stat b { font-size: var(--font-size-lg); font-weight: 600; }   /* 可用等宽字体 */
+.ov-stat span { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-left: 5px; }
+.ov-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: var(--space-md); gap: 2px; }
+.ov-bar i { flex-basis: 0; min-width: 3px; border-radius: 2px; }
+```
+
+```js
+// 按状态分组统计，比例条 flex-grow 驱动（用 0.001 防 0 宽）
+function renderOverview() {
+  const ov = document.getElementById('overview'); if (!ov) return;
+  const total = items.length;
+  const nActive = items.filter(x => x.status === '在用').length;
+  const nReserve = items.filter(x => x.status === '备用').length;
+  const nStop = items.filter(x => x.status === '已停').length;
+  ov.innerHTML =
+      '<div><div class="ov-num">' + total + '</div><div class="ov-cap">总计</div></div>'
+    + '<div class="ov-div"></div>'
+    + '<div class="ov-right"><div class="ov-stats">'
+    +   '<div class="ov-stat"><b style="color:var(--color-status-active)">' + nActive + '</b><span>在用</span></div>'
+    +   '<div class="ov-stat"><b style="color:var(--color-status-reserve)">' + nReserve + '</b><span>备用</span></div>'
+    +   '<div class="ov-stat"><b style="color:var(--color-text-muted)">' + nStop + '</b><span>已停</span></div>'
+    + '</div><div class="ov-bar">'
+    +   '<i style="flex-grow:' + (nActive||0.001) + ';background:var(--color-status-active)"></i>'
+    +   '<i style="flex-grow:' + (nReserve||0.001) + ';background:var(--color-status-reserve)"></i>'
+    +   '<i style="flex-grow:' + (nStop||0.001) + ';background:var(--color-border)"></i>'
+    + '</div></div>';
+}
+```
+
+---
+
 ## Filter Chips 组件
 
 横向滚动的状态筛选条，active 状态使用 accent 色高亮。
@@ -268,6 +328,64 @@ document.documentElement.setAttribute('data-theme',
   box-sizing: border-box;
 }
 ```
+
+### 搜索折叠模式（可选变体 / 方案 B）
+
+默认把搜索框收起成 TopBar 里的🔍图标，点击才展开。**适用场景**：项目数量不多（< 50 条）、以筛选 chips 为主、想让顶部更简洁不被搜索框占地时。已在豆仓/补剂管家实战验证。
+
+```html
+<!-- TopBar 右侧加🔍切换按钮 -->
+<button class="icon-btn" id="searchToggle" aria-label="搜索">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+</button>
+
+<!-- 搜索框默认 hidden，带✕关闭按钮 -->
+<div class="search-wrapper hidden" id="searchWrap">
+  <span class="search-icon">🔍</span>
+  <input type="search" id="search-input" placeholder="搜索..." oninput="handleSearch(this.value)">
+  <button type="button" class="search-clear" id="searchClear" aria-label="关闭搜索">✕</button>
+</div>
+```
+
+```css
+.search-wrapper.hidden { display: none; }
+.search-clear {
+  position: absolute; right: calc(var(--space-xl) + var(--space-sm)); top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: var(--radius-md);
+  background: var(--color-surface-2); border: 1px solid var(--color-border);
+  color: var(--color-text-muted); font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.search-clear:hover { color: var(--color-text); }
+.icon-btn.active {  /* 搜索展开时🔍图标高亮 */
+  background: var(--color-accent); border-color: var(--color-accent); color: #fff;
+}
+```
+
+```js
+// 展开 = 显示+聚焦；关闭 = 隐藏+清空并重新筛选
+const searchWrap = document.getElementById('searchWrap');
+const searchToggle = document.getElementById('searchToggle');
+const searchInput = document.getElementById('search-input');
+function openSearch() {
+  searchWrap.classList.remove('hidden');
+  searchToggle.classList.add('active');
+  setTimeout(() => searchInput.focus(), 30);
+}
+function closeSearch() {
+  searchWrap.classList.add('hidden');
+  searchToggle.classList.remove('active');
+  if (searchInput.value) { searchInput.value = ''; handleSearch(''); }
+}
+searchToggle.addEventListener('click', () =>
+  searchWrap.classList.contains('hidden') ? openSearch() : closeSearch());
+document.getElementById('searchClear').addEventListener('click', closeSearch);
+```
+
+**两种模式怎么选：**
+- **常驻模式**（上面默认）：数据多、搜索是高频动作时，搜索框始终可见。
+- **折叠模式**（方案 B）：数据少、chips 筛选足够、追求顶部简洁时，收起为🔍图标。
 
 ---
 
