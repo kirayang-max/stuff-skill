@@ -300,3 +300,43 @@ PWA 安装到桌面后，iOS Safari 在 standalone 模式下对相对路径 fetc
 - [ ] 部署后访问 `https://my-app.pages.dev` 验证页面加载
 - [ ] 访问 `https://my-app.pages.dev/api/items` 验证 API 返回 JSON（不是 HTML）
 - [ ] 手机浏览器验证 manifest 安装提示出现
+
+---
+
+## 给用户的部署指南（生成应用后贴给用户）
+
+> 以下内容是给**用户**看的,不是给 Agent。生成应用后,把这段贴给用户作为部署指引。
+
+### 本地模式（零配置,拿来就用）
+
+不需要任何账号,不需要安装任何软件。
+
+1. Agent 会给你生成 3 个文件(`index.html` + `styles.css` + `app.js`)
+2. 拖到浏览器里打开 `index.html`,就能用了
+3. 数据存在浏览器里,关掉再打开也不会丢
+4. 想备份?用应用里的"导出 JSON"功能
+
+**限制:** 只能在一个设备上用。手机和电脑的数据不会同步。
+
+### 云模式（多设备同步）
+
+想在手机和电脑上都能用、数据实时同步?需要部署到云上。
+
+**默认方案:Cloudflare(推荐,免费)**
+
+你需要:
+1. 注册一个 [Cloudflare 账号](https://dash.cloudflare.com/sign-up)(免费,不需要绑卡)
+2. 电脑上安装 Node.js([nodejs.org](https://nodejs.org/) 下载安装)
+3. 打开终端,运行 `npm install -g wrangler`
+4. 运行 `wrangler login`,在浏览器里授权
+
+做完这 4 步,告诉 Agent"我 Cloudflare 配好了",Agent 会自动帮你部署。部署完你会拿到一个网址,手机打开就能用。
+
+**其他平台(高级用户)**
+
+如果你熟悉其他平台,也可以部署到:
+- **Vercel + Turso** —— 前端开发者常用
+- **Netlify + Supabase** —— 功能强大但配置稍多
+- **自有服务器** —— 完全自由,需要自己搞定数据库
+
+只需要告诉 Agent 你想用哪个平台,Agent 会适配 API 层。但注意:非 Cloudflare 平台需要你自己有一定技术基础。
